@@ -1,0 +1,5 @@
+export { PageAdmin } from './PageAdmin'
+export { PageHome } from './PageHome'
+export { PageBlog } from './PageBlog'
+export { PageImprint } from './PageImprint'
+export { PageTeam } from './PageTeam'
