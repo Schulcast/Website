@@ -1,6 +1,6 @@
 # Schulcast Website
 
-The official website of Schulcast, build with the [3MO Design Library](http://github.com/3mo-esolutions/model).
+The official website of Schulcast, built with [3MO Design Library](http://github.com/3mo-esolutions/model).
 
 ## Setup
 - `npm install`
