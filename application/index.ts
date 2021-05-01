@@ -1,6 +1,5 @@
 import '@3mo/model'
 import './Schulcast'
-import './Logo'
 import './components'
 import './dialogs'
 import './pages'

@@ -1,6 +1,7 @@
 import { Application, application, component, css, html, property } from '@3mo/model/library'
 import { LocalizationHelper, ThemeHelper } from '@3mo/model/helpers'
 import { Color } from '@3mo/model/types'
+import { Logo } from '@3mo/model/components'
 import * as Pages from './pages'
 
 @application
@@ -10,6 +11,7 @@ export class Schulcast extends Application {
 		super()
 		ThemeHelper.Accent.value = new Color([204, 14, 0])
 		LocalizationHelper.Language.value = 'de'
+		Logo.source = '/assets/logo.png'
 	}
 
 	static get styles() {
