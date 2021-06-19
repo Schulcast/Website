@@ -1,4 +1,4 @@
-import { component, html, internalProperty, PageComponent, property, route } from '@3mo/model/library'
+import { component, html, state, PageComponent, property, route } from '@3mo/model/library'
 import { API, Slide, Task, Post, Member } from 'sdk'
 import { DialogAuthenticate, DialogPost, DialogMember, DialogSlide, DialogTask } from '../dialogs'
 
@@ -17,7 +17,7 @@ export class PageAdmin extends PageComponent {
 	@property({ type: Array }) posts = new Array<Post>()
 	@property({ type: Array }) members = new Array<Member>()
 
-	@internalProperty() private tab = Tab.Posts
+	@state() private tab = Tab.Posts
 
 	protected initialized() {
 		this.fetchSlides()
@@ -26,12 +26,12 @@ export class PageAdmin extends PageComponent {
 		this.fetchPosts()
 	}
 
-	private fetchSlides = async () => this.slides = await API.GET('slide') ?? []
-	private fetchTasks = async () => this.tasks = await API.GET('task') ?? []
-	private fetchMembers = async () => this.members = await API.GET('member') ?? []
-	private fetchPosts = async () => this.posts = await API.GET('blog') ?? []
+	private readonly fetchSlides = async () => this.slides = await API.get('slide') ?? []
+	private readonly fetchTasks = async () => this.tasks = await API.get('task') ?? []
+	private readonly fetchMembers = async () => this.members = await API.get('member') ?? []
+	private readonly fetchPosts = async () => this.posts = await API.get('blog') ?? []
 
-	private authenticate = async () => {
+	private readonly authenticate = async () => {
 		await new DialogAuthenticate().confirm()
 		await this.requestUpdate()
 	}
@@ -57,8 +57,8 @@ export class PageAdmin extends PageComponent {
 				<mo-tab-bar slot='topAppBarDetails' value=${this.tab} @navigate=${(e: CustomEvent<Tab>) => this.tab = e.detail}>
 					<mo-tab value=${Tab.Posts}>Blogeinträge</mo-tab>
 					<mo-tab value=${Tab.Members}>Mitglieder</mo-tab>
-					<mo-tab value=${Tab.Slides} ?hidden=${DialogAuthenticate.AuthenticatedMember?.role !== 'Admin'}>Slideshow</mo-tab>
-					<mo-tab value=${Tab.Tasks} ?hidden=${DialogAuthenticate.AuthenticatedMember?.role !== 'Admin'}>Aufgabengruppen</mo-tab>
+					<mo-tab value=${Tab.Slides} ?hidden=${DialogAuthenticate.authenticatedMember?.role !== 'Admin'}>Slideshow</mo-tab>
+					<mo-tab value=${Tab.Tasks} ?hidden=${DialogAuthenticate.authenticatedMember?.role !== 'Admin'}>Aufgabengruppen</mo-tab>
 				</mo-tab-bar>
 
 				<mo-grid
@@ -125,22 +125,22 @@ export class PageAdmin extends PageComponent {
 		}
 	}
 
-	private openSlideDialog = async (slide?: Slide) => {
+	private readonly openSlideDialog = async (slide?: Slide) => {
 		await new DialogSlide({ entity: slide }).open()
 		await this.fetchSlides()
 	}
 
-	private openTaskDialog = async (task?: Task) => {
+	private readonly openTaskDialog = async (task?: Task) => {
 		await new DialogTask({ entity: task }).open()
 		await this.fetchTasks()
 	}
 
-	private openMemberDialog = async (member?: Member) => {
+	private readonly openMemberDialog = async (member?: Member) => {
 		await new DialogMember({ entity: member }).open()
 		await this.fetchMembers()
 	}
 
-	private openPostDialog = async (post?: Post) => {
+	private readonly openPostDialog = async (post?: Post) => {
 		await new DialogPost({ entity: post }).open()
 		await this.fetchPosts()
 	}

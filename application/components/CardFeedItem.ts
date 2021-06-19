@@ -8,6 +8,7 @@ export class CardFeedItem extends Component {
 	@property({ type: Object }) feedItem!: FeedItem
 
 	protected render() {
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		return !this.feedItem ? nothing : html`
 			<style>
 				:host {
@@ -144,9 +145,10 @@ export class CardFeedItem extends Component {
 	}
 
 
-	private handleClick = () => {
-		if (!this.feedItem.link)
+	private readonly handleClick = () => {
+		if (!this.feedItem.link) {
 			return
+		}
 
 		switch (this.feedItem.type) {
 			case FeedItemType.Article:

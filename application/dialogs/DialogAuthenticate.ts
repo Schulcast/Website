@@ -1,4 +1,4 @@
-import { component, DialogComponent, html, internalProperty } from '@3mo/model/library'
+import { component, DialogComponent, html, state } from '@3mo/model/library'
 import { LocalStorageEntry } from '@3mo/model/helpers'
 import { Member, API } from 'sdk'
 
@@ -6,22 +6,22 @@ import { Member, API } from 'sdk'
 
 @component('sc-dialog-authenticate')
 export class DialogAuthenticate extends DialogComponent {
-	private static AuthenticatedMemberEntry = new LocalStorageEntry<Member | undefined>('Schulcast.AuthenticatedMember', undefined)
+	private static authenticatedMemberEntry = new LocalStorageEntry<Member | undefined>('Schulcast.AuthenticatedMember', undefined)
 
-	static get AuthenticatedMember() {
-		return this.AuthenticatedMemberEntry.value
+	static get authenticatedMember() {
+		return this.authenticatedMemberEntry.value
 	}
 
 	static get isAuthenticated() {
-		return !!this.AuthenticatedMember
+		return !!this.authenticatedMember
 	}
 
 	static unauthenticate = () => {
-		DialogAuthenticate.AuthenticatedMemberEntry.value = undefined
+		DialogAuthenticate.authenticatedMemberEntry.value = undefined
 	}
 
-	@internalProperty() private username = ''
-	@internalProperty() private password = ''
+	@state() private username = ''
+	@state() private password = ''
 
 	protected render() {
 		return html`
@@ -34,7 +34,7 @@ export class DialogAuthenticate extends DialogComponent {
 		`
 	}
 
-	private authenticate = async () => {
-		DialogAuthenticate.AuthenticatedMemberEntry.value = await API.GET<Member>(`member/authenticate?nickname=${this.username}&password=${this.password}`)
+	private readonly authenticate = async () => {
+		DialogAuthenticate.authenticatedMemberEntry.value = await API.get<Member>(`member/authenticate?nickname=${this.username}&password=${this.password}`)
 	}
 }

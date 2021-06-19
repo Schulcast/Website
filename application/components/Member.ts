@@ -47,7 +47,7 @@ export class Member extends Component {
 				<sc-thumbnail fileId=${ifDefined(this.member?.imageId)}></sc-thumbnail>
 				<h3>${this.member?.nickname}</h3>
 				<p>
-					${this.member?.tasks.map(task => task.task.title).join('-')}
+					${this.member?.tasks?.map(task => task.task.title).join('-')}
 				</p>
 			</div>
 		`

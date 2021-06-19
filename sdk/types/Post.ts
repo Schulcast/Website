@@ -6,5 +6,5 @@ export interface Post extends Entity {
 	published: IsoDate
 	lastUpdated: IsoDate
 	memberId: number
-	member: Member
+	member?: Member
 }

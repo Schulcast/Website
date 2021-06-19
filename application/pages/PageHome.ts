@@ -14,8 +14,8 @@ export class PageHome extends PageComponent {
 		this.fetchSlides()
 	}
 
-	private fetchSlides = async () => this.slides = await API.GET('slide') ?? []
-	private fetchFeed = async () => this.feed = await API.GET('feed') ?? []
+	private readonly fetchSlides = async () => this.slides = await API.get('slide') ?? []
+	private readonly fetchFeed = async () => this.feed = await API.get('feed') ?? []
 
 	protected render() {
 		const slides = this.slides.length === 0 ? nothing : html`

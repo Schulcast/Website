@@ -9,13 +9,15 @@ import { API, Member, Slide } from 'sdk'
 export class DialogSlide extends EntityDialogComponent<Slide> {
 	@property({ type: Array }) members = new Array<Member>()
 
+	@query('sc-upload') private readonly uploadElement!: Upload<{ id: number }>
+
 	protected async initialized() {
-		this.members = await API.GET('member')
+		this.members = await API.get('member') ?? []
 	}
 
 	private get header() {
-		return this.entity?.id
-			? `Slide #${this.entity?.id}`
+		return this.entity.id
+			? `Slide #${this.entity.id}`
 			: 'Neue Slide'
 	}
 
@@ -24,7 +26,7 @@ export class DialogSlide extends EntityDialogComponent<Slide> {
 			<mo-dialog header=${this.header}>
 				<mo-flex gap='var(--mo-thickness-m)'>
 					<mo-text-area label='Beschreibung' required
-						value=${this.entity.description ?? ''}
+						value=${this.entity.description}
 						@change=${(e: CustomEvent<string>) => this.entity.description = e.detail}
 					></mo-text-area>
 
@@ -36,12 +38,12 @@ export class DialogSlide extends EntityDialogComponent<Slide> {
 		`
 	}
 
-	@query('sc-upload') private readonly uploadElement!: Upload<{ id: number }>
-
 	protected async save() {
 		const image = await this.uploadElement.upload()
-		if (!image?.id)
+
+		if (!image?.id) {
 			return
+		}
 
 		await super.save()
 	}

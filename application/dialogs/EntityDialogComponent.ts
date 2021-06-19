@@ -1,4 +1,4 @@
-import { DialogComponent, DialogComponentConstructor, DialogHost, PropertyValues } from '@3mo/model/library'
+import { DialogComponent, DialogComponentConstructor, DialogDefault, PropertyValues } from '@3mo/model/library'
 import { Entity, API } from 'sdk'
 
 export const entityDialogComponent = (controller: string) => {
@@ -33,18 +33,22 @@ export abstract class EntityDialogComponent<T extends Entity> extends DialogComp
 
 	protected async save() {
 		if (!this.parameters.entity?.id) {
-			await API.POST(this.controller, this.entity)
+			await API.post(this.controller, this.entity)
 		} else {
-			await API.PUT(`${this.controller}/${this.parameters.entity.id}`, this.entity)
+			await API.put(`${this.controller}/${this.parameters.entity.id}`, this.entity)
 		}
 	}
 
 	protected async delete() {
-		if (!this.parameters.entity?.id)
+		if (!this.parameters.entity?.id) {
 			return
+		}
 
-		await DialogHost.confirmDeletionIfNecessary('Soll dieser Eintrag gelöscht werden?')
+		await new DialogDefault({
+			header: 'Bestätigung',
+			content: 'Soll dieser Eintrag gelöscht werden?',
+		}).confirm()
 
-		await API.DELETE(`${this.controller}/${this.parameters.entity.id}`)
+		await API.delete(`${this.controller}/${this.parameters.entity.id}`)
 	}
 }

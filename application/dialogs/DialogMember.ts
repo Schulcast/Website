@@ -10,13 +10,15 @@ import { sha256 } from 'js-sha256'
 export class DialogMember extends EntityDialogComponent<Member> {
 	@property({ type: Array }) tasks = new Array<Task>()
 
+	@query('sc-upload') private readonly uploadElement?: Upload<{ id: number }>
+
 	protected async initialized() {
-		this.tasks = await API.GET('task') ?? []
+		this.tasks = await API.get('task') ?? []
 	}
 
 	private get header() {
-		return this.entity?.id
-			? `Mitglied #${this.entity?.id}`
+		return this.entity.id
+			? `Mitglied #${this.entity.id}`
 			: 'Neuer Mitglied'
 	}
 
@@ -30,7 +32,7 @@ export class DialogMember extends EntityDialogComponent<Member> {
 					</mo-flex>
 				
 					<mo-field-text label='Spitzname' required
-						value=${this.entity.nickname ?? ''}
+						value=${this.entity.nickname}
 						@change=${(e: CustomEvent<string>) => this.entity.nickname = e.detail}
 					></mo-field-text>
 
@@ -40,8 +42,8 @@ export class DialogMember extends EntityDialogComponent<Member> {
 					></mo-field-password>
 
 					<mo-field-select label='Aufgabe' multiple
-						.value=${this.entity.tasks?.map(task => task.taskId)}
-						@change=${(e: CustomEvent<Array<number>>) => this.entity.tasks = (e.detail ?? []).map(taskId => ({ taskId: taskId, memberId: this.entity.id })) as Array<MemberTask>}
+						.value=${this.entity.tasks?.map(task => String(task.taskId))}
+						@change=${(e: CustomEvent<Array<number>>) => this.entity.tasks = e.detail.map(taskId => ({ taskId: taskId, memberId: this.entity.id })) as Array<MemberTask>}
 					>
 						${this.tasks.map(task => html`
 							<mo-option value=${task.id} multiple>${task.title}</mo-option>
@@ -53,8 +55,6 @@ export class DialogMember extends EntityDialogComponent<Member> {
 			</mo-dialog>
 		`
 	}
-
-	@query('sc-upload') private readonly uploadElement?: Upload<{ id: number }>
 
 	private get uploadButtonLabel() {
 		switch (true) {
@@ -72,10 +72,10 @@ export class DialogMember extends EntityDialogComponent<Member> {
 		await super.save()
 	}
 
-	private uploadImageIfSet = async () => {
-		if (!this.uploadElement || !this.uploadElement.files.length)
+	private readonly uploadImageIfSet = async () => {
+		if (!this.uploadElement || !this.uploadElement.files.length) {
 			return
-
+		}
 
 		const image = await this.uploadElement.upload()
 		this.entity.imageId = image?.id ?? 0

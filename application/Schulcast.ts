@@ -7,13 +7,6 @@ import * as Pages from './pages'
 @application
 @component('sc-application')
 export class Schulcast extends Application {
-	constructor() {
-		super()
-		ThemeHelper.Accent.value = new Color([204, 14, 0])
-		LocalizationHelper.Language.value = 'de'
-		Logo.source = '/assets/logo.png'
-	}
-
 	static get styles() {
 		return css`
 			${super.styles}
@@ -66,6 +59,13 @@ export class Schulcast extends Application {
 	}
 
 	@property({ type: Boolean, reflect: true }) playing = false
+
+	constructor() {
+		super()
+		ThemeHelper.accent.value = new Color([204, 14, 0])
+		LocalizationHelper.language.value = 'de'
+		Logo.source = '/assets/logo.png'
+	}
 
 	protected render() {
 		return html`

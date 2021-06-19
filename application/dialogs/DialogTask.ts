@@ -6,8 +6,8 @@ import { Task } from 'sdk'
 @component('sc-dialog-task')
 export class DialogTask extends EntityDialogComponent<Task> {
 	private get header() {
-		return this.entity?.id
-			? `Aufgabe #${this.entity?.id}`
+		return this.entity.id
+			? `Aufgabe #${this.entity.id}`
 			: 'Neue Aufgabe'
 	}
 
@@ -15,7 +15,7 @@ export class DialogTask extends EntityDialogComponent<Task> {
 		return html`
 			<mo-dialog header=${this.header}>
 				<mo-field-text label='Titel' required
-					value=${this.entity.title ?? ''}
+					value=${this.entity.title}
 					@change=${(e: CustomEvent<string>) => this.entity.title = e.detail}
 				></mo-field-text>
 			</mo-dialog>

@@ -52,7 +52,7 @@ export class DialogMemberData extends DialogComponent<{ member: Member }> {
 					<table>
 						<tr>
 							<td>Aufgaben</td>
-							<td>${this.member.tasks.map(memberTask => memberTask.task.title).join(' - ')}</td>
+							<td>${this.member.tasks?.map(memberTask => memberTask.task.title).join(' - ')}</td>
 						</tr>
 
 						${this.member.data.map(memberData => html`

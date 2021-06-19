@@ -8,7 +8,7 @@ export class PageBlog extends PageComponent<{ id: number }> {
 	@property({ type: Object }) post?: Post
 
 	protected async initialized() {
-		this.post = await API.GET(`blog/${this.parameters.id}`)
+		this.post = await API.get(`blog/${this.parameters.id}`)
 	}
 
 	protected render() {

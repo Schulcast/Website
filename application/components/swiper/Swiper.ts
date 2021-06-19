@@ -7,6 +7,13 @@ export class Swiper extends Component {
 	@property({ type: Boolean, reflect: true }) hasThumb = false
 	@property({ type: Boolean, reflect: true }) autoplay = true
 
+	@element private readonly divContainer!: HTMLDivElement
+	@element private readonly divSlides?: HTMLDivElement
+	@element private readonly divGallery!: HTMLDivElement
+	@element private readonly divPagination!: HTMLDivElement
+	@element private readonly divPrevious!: HTMLDivElement
+	@element private readonly divNext!: HTMLDivElement
+
 	slider?: SwiperLibrary.Swiper
 
 	static get styles() {
@@ -14,7 +21,10 @@ export class Swiper extends Component {
 	}
 
 	get slides() {
-		return [...Array.from(this.querySelectorAll('mo-swiper-slide') ?? []), ...Array.from(this.divSlides?.querySelectorAll('mo-swiper-slide') ?? [])]
+		return [
+			...Array.from(this.querySelectorAll('mo-swiper-slide')),
+			...Array.from(this.divSlides?.querySelectorAll('mo-swiper-slide') ?? [])
+		]
 	}
 
 	protected initialized() {
@@ -54,13 +64,6 @@ export class Swiper extends Component {
 			preventClicksPropagation: false,
 		})
 	}
-
-	@element private readonly divContainer!: HTMLDivElement
-	@element private readonly divSlides!: HTMLDivElement
-	@element private readonly divGallery!: HTMLDivElement
-	@element private readonly divPagination!: HTMLDivElement
-	@element private readonly divPrevious!: HTMLDivElement
-	@element private readonly divNext!: HTMLDivElement
 
 	protected render = () => html`
 		<style>

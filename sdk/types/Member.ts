@@ -6,7 +6,7 @@ export interface Member extends Entity {
 	password: string
 	token: string
 	imageId: number
-	tasks: Array<MemberTask>
+	tasks?: Array<MemberTask>
 	data: Array<MemberData>
 	posts: Array<Post>
 }

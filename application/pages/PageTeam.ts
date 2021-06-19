@@ -9,7 +9,7 @@ export class PageTeam extends PageComponent {
 	@property({ type: Array }) members = new Array<Member>()
 
 	protected async initialized() {
-		this.members = await API.GET('member')
+		this.members = await API.get('member') ?? []
 	}
 
 	protected render() {
