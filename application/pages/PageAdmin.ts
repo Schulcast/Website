@@ -126,22 +126,22 @@ export class PageAdmin extends PageComponent {
 	}
 
 	private readonly openSlideDialog = async (slide?: Slide) => {
-		await new DialogSlide({ entity: slide }).open()
+		await new DialogSlide({ entity: slide }).confirm()
 		await this.fetchSlides()
 	}
 
 	private readonly openTaskDialog = async (task?: Task) => {
-		await new DialogTask({ entity: task }).open()
+		await new DialogTask({ entity: task }).confirm()
 		await this.fetchTasks()
 	}
 
 	private readonly openMemberDialog = async (member?: Member) => {
-		await new DialogMember({ entity: member }).open()
+		await new DialogMember({ entity: member }).confirm()
 		await this.fetchMembers()
 	}
 
 	private readonly openPostDialog = async (post?: Post) => {
-		await new DialogPost({ entity: post }).open()
+		await new DialogPost({ entity: post }).confirm()
 		await this.fetchPosts()
 	}
 }

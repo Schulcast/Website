@@ -22,7 +22,7 @@ export class DialogPost extends EntityDialogComponent<Post> {
 			<mo-dialog header=${this.header} size='medium'>
 				<mo-flex gap='var(--mo-thickness-m)'>
 					<mo-field-text label='Titel' required
-						value=${this.entity.title}
+						value=${this.entity.title ?? ''}
 						@change=${(e: CustomEvent<string>) => this.entity.title = e.detail}
 					></mo-field-text>
 
@@ -38,7 +38,7 @@ export class DialogPost extends EntityDialogComponent<Post> {
 					</mo-field-select>
 
 					<mo-text-area label='Inhalt' rows='11' required
-						value=${this.entity.content}
+						value=${this.entity.content ?? ''}
 						@change=${(e: CustomEvent<string>) => this.entity.content = e.detail}
 					></mo-text-area>
 				</mo-flex>

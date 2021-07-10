@@ -1,4 +1,5 @@
-import { DialogComponent, DialogComponentConstructor, DialogDefault, PropertyValues } from '@3mo/model/library'
+import { DialogComponent, DialogComponentConstructor, PropertyValues } from '@3mo/model/library'
+import { DialogDefault } from '@3mo/model/components'
 import { Entity, API } from 'sdk'
 
 export const entityDialogComponent = (controller: string) => {
@@ -25,11 +26,11 @@ export abstract class EntityDialogComponent<T extends Entity> extends DialogComp
 		super.firstUpdated(props)
 		if (this.dialog) {
 			this.dialog.primaryButtonText = 'Speichern'
-			this.dialog.primaryButtonClicked = () => this.save()
 			this.dialog.secondaryButtonText = this.parameters.entity?.id ? 'Löschen' : ''
-			this.dialog.secondaryButtonClicked = () => this.delete()
 		}
 	}
+
+	protected primaryButtonAction = () => this.save()
 
 	protected async save() {
 		if (!this.parameters.entity?.id) {
@@ -38,6 +39,8 @@ export abstract class EntityDialogComponent<T extends Entity> extends DialogComp
 			await API.put(`${this.controller}/${this.parameters.entity.id}`, this.entity)
 		}
 	}
+
+	protected secondaryButtonAction = () => this.delete()
 
 	protected async delete() {
 		if (!this.parameters.entity?.id) {

@@ -34,7 +34,7 @@ export class PageTeam extends PageComponent {
 					rowGap='var(--mo-thickness-m)'
 				>
 					${this.members.map(member => html`
-						<sc-member .member=${member} @click=${() => new DialogMemberData({ member: member }).open()}></sc-member>
+						<sc-member .member=${member} @click=${() => new DialogMemberData({ member: member }).confirm()}></sc-member>
 					`)}
 				</mo-grid>
 			</mo-page>

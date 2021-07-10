@@ -25,7 +25,7 @@ export class DialogAuthenticate extends DialogComponent {
 
 	protected render() {
 		return html`
-			<mo-dialog header='Einloggen' primaryButtonText='Einloggen' .primaryButtonClicked=${this.authenticate}>
+			<mo-dialog header='Einloggen' primaryButtonText='Einloggen'>
 				<mo-flex gap='var(--mo-thickness-m)'>
 					<mo-field-text label='Spitzname' required @change=${(e: CustomEvent<string>) => this.username = e.detail}></mo-field-text>
 					<mo-field-password label='Passwort' required @change=${(e: CustomEvent<string>) => this.password = e.detail}></mo-field-password>
@@ -34,7 +34,7 @@ export class DialogAuthenticate extends DialogComponent {
 		`
 	}
 
-	private readonly authenticate = async () => {
+	protected primaryButtonAction = async () => {
 		DialogAuthenticate.authenticatedMemberEntry.value = await API.get<Member>(`member/authenticate?nickname=${this.username}&password=${this.password}`)
 	}
 }
