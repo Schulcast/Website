@@ -1,4 +1,4 @@
-import { component, Component, html } from '@3mo/model/library'
+import { component, Component, html } from '@3mo/model'
 
 @component('sc-social-media')
 export class SocialMedia extends Component {

@@ -1,4 +1,4 @@
-import { Component, component, html, property } from '@3mo/model/library'
+import { Component, component, html, property } from '@3mo/model'
 import { API } from 'sdk'
 
 @component('sc-upload')

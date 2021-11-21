@@ -1,5 +1,4 @@
-import { DialogComponent, DialogComponentConstructor, PropertyValues } from '@3mo/model/library'
-import { DialogDefault } from '@3mo/model/components'
+import { DialogComponent, DialogComponentConstructor, PropertyValues, DialogDefault } from '@3mo/model'
 import { Entity, API } from 'sdk'
 
 export const entityDialogComponent = (controller: string) => {
@@ -48,7 +47,7 @@ export abstract class EntityDialogComponent<T extends Entity> extends DialogComp
 		}
 
 		await new DialogDefault({
-			header: 'Bestätigung',
+			heading: 'Bestätigung',
 			content: 'Soll dieser Eintrag gelöscht werden?',
 		}).confirm()
 

@@ -1,5 +1,5 @@
 
-import { component, html, property, query } from '@3mo/model/library'
+import { component, html, property, query } from '@3mo/model'
 import { entityDialogComponent, EntityDialogComponent } from './EntityDialogComponent'
 import { API, Member, MemberTask, Task } from 'sdk'
 import { Upload } from '../components'
@@ -24,7 +24,7 @@ export class DialogMember extends EntityDialogComponent<Member> {
 
 	protected render() {
 		return html`
-			<mo-dialog header=${this.header}>
+			<mo-dialog heading=${this.header}>
 				<mo-flex gap='var(--mo-thickness-l)'>
 					<mo-flex alignItems='center' gap='var(--mo-thickness-l)'>
 						<sc-thumbnail ?hidden=${!this.entity.imageId} fileId=${this.entity.imageId}></sc-thumbnail>

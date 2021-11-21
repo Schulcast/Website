@@ -1,4 +1,4 @@
-import { component, html, state, PageComponent, property, route } from '@3mo/model/library'
+import { component, html, state, PageComponent, property, route } from '@3mo/model'
 import { API, Slide, Task, Post, Member } from 'sdk'
 import { DialogAuthenticate, DialogPost, DialogMember, DialogSlide, DialogTask } from '../dialogs'
 
@@ -43,7 +43,7 @@ export class PageAdmin extends PageComponent {
 
 	protected render() {
 		return html`
-			<mo-page header='Admin Center' fullHeight>
+			<mo-page heading='Admin Center' fullHeight>
 				<style>
 					h2 {
 						text-align: center;
@@ -54,34 +54,36 @@ export class PageAdmin extends PageComponent {
 					}
 				</style>
 
-				<mo-tab-bar slot='topAppBarDetails' value=${this.tab} @navigate=${(e: CustomEvent<Tab>) => this.tab = e.detail}>
+				<mo-tab-bar slot='pageHeadingDetails' value=${this.tab} @navigate=${(e: CustomEvent<Tab>) => this.tab = e.detail}>
 					<mo-tab value=${Tab.Posts}>Blogeinträge</mo-tab>
 					<mo-tab value=${Tab.Members}>Mitglieder</mo-tab>
 					<mo-tab value=${Tab.Slides} ?hidden=${DialogAuthenticate.authenticatedMember?.role !== 'Admin'}>Slideshow</mo-tab>
 					<mo-tab value=${Tab.Tasks} ?hidden=${DialogAuthenticate.authenticatedMember?.role !== 'Admin'}>Aufgabengruppen</mo-tab>
 				</mo-tab-bar>
 
-				<mo-grid
-					?hidden=${!DialogAuthenticate.isAuthenticated}
-					width='100%'
-					columns='repeat(auto-fit, minmax(225px, 1fr))'
-					columnGap='var(--mo-thickness-m)'
-					rowGap='var(--mo-thickness-m)'
-				>
-					${this.currentTabCards}
-				</mo-grid>
+				<mo-flex>
+					<mo-grid
+						?hidden=${!DialogAuthenticate.isAuthenticated}
+						width='100%'
+						columns='repeat(auto-fit, minmax(225px, 1fr))'
+						columnGap='var(--mo-thickness-m)'
+						rowGap='var(--mo-thickness-m)'
+					>
+						${this.currentTabCards}
+					</mo-grid>
 
-				<mo-fab position='absolute' right='16px' bottom='85px' extended icon='add'
-					?hidden=${!DialogAuthenticate.isAuthenticated}
-					label=${this.currentTabAction}
-					@click=${this.openDialog}
-				></mo-fab>
+					<mo-fab position='absolute' right='16px' bottom='85px' extended icon='add'
+						?hidden=${!DialogAuthenticate.isAuthenticated}
+						label=${this.currentTabAction}
+						@click=${this.openDialog}
+					></mo-fab>
 
-				<mo-fab position='absolute' right='16px' bottom='16px' extended
-					label=${DialogAuthenticate.isAuthenticated ? 'Ausloggen' : 'Einloggen'}
-					icon=${DialogAuthenticate.isAuthenticated ? 'logout' : 'login'}
-					@click=${DialogAuthenticate.isAuthenticated ? this.unauthenticate : this.authenticate}
-				></mo-fab>
+					<mo-fab position='absolute' right='16px' bottom='16px' extended
+						label=${DialogAuthenticate.isAuthenticated ? 'Ausloggen' : 'Einloggen'}
+						icon=${DialogAuthenticate.isAuthenticated ? 'logout' : 'login'}
+						@click=${DialogAuthenticate.isAuthenticated ? this.unauthenticate : this.authenticate}
+					></mo-fab>
+				</mo-flex>
 			</mo-page>
 		`
 	}

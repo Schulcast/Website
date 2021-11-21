@@ -1,5 +1,5 @@
 
-import { component, html, property, query } from '@3mo/model/library'
+import { component, html, property, query } from '@3mo/model'
 import { entityDialogComponent, EntityDialogComponent } from './EntityDialogComponent'
 import { Upload } from '../components'
 import { API, Member, Slide } from 'sdk'
@@ -23,7 +23,7 @@ export class DialogSlide extends EntityDialogComponent<Slide> {
 
 	protected render() {
 		return html`
-			<mo-dialog header=${this.header}>
+			<mo-dialog heading=${this.header}>
 				<mo-flex gap='var(--mo-thickness-m)'>
 					<mo-text-area label='Beschreibung' required
 						value=${this.entity.description}

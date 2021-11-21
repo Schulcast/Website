@@ -1,4 +1,4 @@
-import { Component, component, html, nothing, property } from '@3mo/model/library'
+import { Component, component, html, nothing, property } from '@3mo/model'
 import { FeedItem, FeedItemType } from 'sdk'
 import { Player } from '.'
 import { PageBlog } from '../pages'
@@ -21,8 +21,7 @@ export class CardFeedItem extends Component {
 				mo-card {
 					height: 100%;
 					width: 100%;
-					--mo-card-padding-horizontal: 0px;
-					--mo-card-padding-vertical: 0px;
+					--mo-card-body-padding: 8px 8px 16px 8px;
 				}
 
 				mo-icon-button {
@@ -78,35 +77,30 @@ export class CardFeedItem extends Component {
 					width: auto;
 				}
 
-				h3 {
+				mo-heading {
 					min-width: 0;
-					flex: 1;
 					text-overflow: ellipsis;
 					white-space: normal;
 					overflow: hidden;
 					font-weight: 400;
-					margin: 0;
-					display: flex;
-					justify-content: center;
-					font-size: 1.2em;
-					text-align: center;
-					margin: 4px 4px 8px 4px;
 				}
 			</style>
 			<mo-card @click=${this.handleClick}>
-				<mo-flex part='image' position='relative' background=${`url("${this.feedItem.type === FeedItemType.Article ? '/assets/blog.jpg' : this.feedItem.imageUrl}")`}>
+				<mo-flex slot='media' part='image' position='relative' background=${`url("${this.feedItem.type === FeedItemType.Article ? '/assets/blog.jpg' : this.feedItem.imageUrl}")`}>
 					<mo-flex part='overlay' alignItems='center' justifyContent='center' foreground='var(--mo-accent)'>
 						<mo-icon-button icon=${this.feedItem.type === FeedItemType.Article ? 'menu_book' : 'play_arrow'}></mo-icon-button>
 						<b>${this.actionText}</b>
 					</mo-flex>
 				</mo-flex>
 
-				<mo-flex direction='horizontal' justifyContent='space-between' margin='4px'>
-					<span part='meta'>${new MoDate(this.feedItem.date).difference().text}</span>
-					<span part='tag'>${this.subjectTag}</span>
-				</mo-flex>
+				<mo-flex width='100%' gap='12px'>
+					<mo-flex direction='horizontal' justifyContent='space-between'>
+						<span part='meta'>${new MoDate(this.feedItem.date).difference().text}</span>
+						<span part='tag'>${this.subjectTag}</span>
+					</mo-flex>
 
-				<h3 part='header'>${this.feedItem.title}</h3>
+					<mo-heading typography='heading5' textAlign='center' part='heading'>${this.feedItem.title}</mo-heading>
+				</mo-flex>
 			</mo-card>
 		`
 	}

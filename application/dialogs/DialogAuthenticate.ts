@@ -1,5 +1,4 @@
-import { component, DialogComponent, html, state } from '@3mo/model/library'
-import { LocalStorageEntry } from '@3mo/model/helpers'
+import { component, DialogComponent, html, state, LocalStorageEntry } from '@3mo/model'
 import { Member, API } from 'sdk'
 
 // TODO: handle through MoDeL's DialogAuthenticator
@@ -25,7 +24,7 @@ export class DialogAuthenticate extends DialogComponent {
 
 	protected render() {
 		return html`
-			<mo-dialog header='Einloggen' primaryButtonText='Einloggen'>
+			<mo-dialog heading='Einloggen' primaryButtonText='Einloggen'>
 				<mo-flex gap='var(--mo-thickness-m)'>
 					<mo-field-text label='Spitzname' required @change=${(e: CustomEvent<string>) => this.username = e.detail}></mo-field-text>
 					<mo-field-password label='Passwort' required @change=${(e: CustomEvent<string>) => this.password = e.detail}></mo-field-password>

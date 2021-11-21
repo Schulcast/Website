@@ -1,4 +1,4 @@
-import { component, Component, html, property, event, query } from '@3mo/model/library'
+import { component, Component, html, property, event, query } from '@3mo/model'
 
 /**
  * @fires sourceChange
@@ -7,7 +7,7 @@ import { component, Component, html, property, event, query } from '@3mo/model/l
 export class Player extends Component {
 	static get instance() { return MoDeL.application.shadowRoot.querySelector('sc-player') as Player }
 
-	@event() private readonly sourceChange!: IEvent<string | undefined>
+	@event() private readonly sourceChange!: EventDispatcher<string | undefined>
 
 	@query('audio') private readonly audioElement!: HTMLAudioElement
 	@query('source') private readonly sourceElement!: HTMLSourceElement

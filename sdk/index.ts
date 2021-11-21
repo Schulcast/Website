@@ -1,2 +1,2 @@
 export * from './types'
-export { API } from './Api'
+export * from './Api'

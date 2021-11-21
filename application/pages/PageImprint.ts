@@ -1,11 +1,11 @@
-import { component, html, PageComponent, route } from '@3mo/model/library'
+import { component, html, PageComponent, route } from '@3mo/model'
 
 @route('/imprint')
 @component('sc-page-imprint')
 export class PageImprint extends PageComponent {
 	protected render() {
 		return html`
-			<mo-page header='Impressum'>
+			<mo-page heading='Impressum'>
 				<style>
 					div {
 						line-height: 175%;
