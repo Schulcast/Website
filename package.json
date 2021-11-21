@@ -7,9 +7,9 @@
 	},
 	"dependencies": {
 		"@3mo/model": "git+https://github.com/3mo-esolutions/model.git",
+		"@a11d/lit-slider": "*",
 		"@ts-stack/markdown": "*",
-		"js-sha256": "*",
-		"swiper": "6.*"
+		"js-sha256": "*"
 	},
 	"devDependencies": {
 		"@types/markdown-it": "*",
@@ -17,7 +17,7 @@
 		"favicons-webpack-plugin": "*",
 		"lit-analyzer": "1.2.*",
 		"ts-lit-plugin": "1.2.*",
-		"typescript": "4.*",
+		"typescript": "4.3.*",
 		"webpack": "5.*",
 		"webpack-cli": "4.*",
 		"webpack-dev-server": "3.*"

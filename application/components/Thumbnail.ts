@@ -1,4 +1,4 @@
-import { component, Component, html, property } from '@3mo/model/library'
+import { component, Component, html, property } from '@3mo/model'
 import { API } from 'sdk'
 
 @component('sc-thumbnail')

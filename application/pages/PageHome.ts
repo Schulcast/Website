@@ -1,5 +1,5 @@
 
-import { component, homePage, html, nothing, PageComponent, property, route } from '@3mo/model/library'
+import { component, homePage, html, nothing, PageComponent, property, route, styleMap } from '@3mo/model'
 import { API, FeedItem, Slide } from 'sdk'
 
 @homePage
@@ -19,16 +19,16 @@ export class PageHome extends PageComponent {
 
 	protected render() {
 		const slides = this.slides.length === 0 ? nothing : html`
-			<mo-swiper height='500px'>
+			<lit-slider style='height: 500px; --lit-slider-navigation-color: var(--mo-accent); --lit-slider-theme-color: var(--mo-accent);'>
 				${this.slides.map(slide => html`
-					<mo-swiper-slide background=${`url("http://api.schulcast.de/file/${slide.id}")`}>
+					<lit-slide style=${styleMap({ background: `url("http://api.schulcast.de/file/${slide.id}")` })}>
 						<div style='font-size: var(--mo-font-size-xl); text-align: center; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;'>${slide.description}</div>
-					</mo-swiper-slide>
+					</lit-slide>
 				`)}
-			</mo-swiper>
+			</lit-slider>
 		`
 		return html`
-			<mo-page header='Startseite'>
+			<mo-page heading='Startseite'>
 				<style>
 					h2 {
 						font: 400 24px/1.3333333333 Roboto;
@@ -40,11 +40,7 @@ export class PageHome extends PageComponent {
 				</style>
 				${slides}
 				<h2>Zuletzt veröffentlicht</h2>
-				<mo-grid
-					columns='repeat(auto-fit, minmax(250px, 1fr))'
-					columnGap='var(--mo-thickness-m)'
-					rowGap='1em'
-				>
+				<mo-grid columns='repeat(auto-fit, minmax(250px, 1fr))' gap='1em'>
 					${this.feed.map(feedItem => html`<sc-card-feed-item .feedItem=${feedItem}></sc-card-feed-item>`)}
 				</mo-grid>
 			</mo-page>

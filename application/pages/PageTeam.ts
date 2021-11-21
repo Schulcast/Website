@@ -1,5 +1,5 @@
 
-import { component, html, PageComponent, property, route } from '@3mo/model/library'
+import { component, html, PageComponent, property, route } from '@3mo/model'
 import { API, Member } from 'sdk'
 import { DialogMemberData } from '../dialogs'
 
@@ -14,7 +14,7 @@ export class PageTeam extends PageComponent {
 
 	protected render() {
 		return html`
-			<mo-page header='Team'>
+			<mo-page heading='Team'>
 				<style>
 					:host {
 						line-height: 175%;

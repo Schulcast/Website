@@ -1,4 +1,4 @@
-import { component, Component, html } from '@3mo/model/library'
+import { component, Component, html } from '@3mo/model'
 
 @component('sc-copyright')
 export class Copyright extends Component {

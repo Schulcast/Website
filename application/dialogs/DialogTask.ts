@@ -1,4 +1,4 @@
-import { component, html } from '@3mo/model/library'
+import { component, html } from '@3mo/model'
 import { entityDialogComponent, EntityDialogComponent } from './EntityDialogComponent'
 import { Task } from 'sdk'
 
@@ -13,7 +13,7 @@ export class DialogTask extends EntityDialogComponent<Task> {
 
 	protected render() {
 		return html`
-			<mo-dialog header=${this.header}>
+			<mo-dialog heading=${this.header}>
 				<mo-field-text label='Titel' required
 					value=${this.entity.title}
 					@change=${(e: CustomEvent<string>) => this.entity.title = e.detail}

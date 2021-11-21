@@ -1,3 +1,4 @@
+import '@a11d/lit-slider'
 import '@3mo/model'
 import './Schulcast'
 import './components'

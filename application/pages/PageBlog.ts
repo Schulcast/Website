@@ -1,4 +1,4 @@
-import { component, PageComponent, route, html, property } from '@3mo/model/library'
+import { component, PageComponent, route, html, property } from '@3mo/model'
 import { API, Post } from 'sdk'
 import { Marked } from '@ts-stack/markdown'
 
@@ -13,7 +13,7 @@ export class PageBlog extends PageComponent<{ id: number }> {
 
 	protected render() {
 		return html`
-			<mo-page header='Blogeintrag'>
+			<mo-page heading='Blogeintrag'>
 				<style>
 					:host {
 						font-size: 18px;

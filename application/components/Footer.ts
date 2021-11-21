@@ -1,4 +1,4 @@
-import { Component, component, html } from '@3mo/model/library'
+import { Component, component, html } from '@3mo/model'
 import { PageImprint } from '../pages'
 
 @component('sc-footer')

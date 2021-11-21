@@ -1,4 +1,4 @@
-import { html, component, DialogComponent } from '@3mo/model/library'
+import { html, component, DialogComponent } from '@3mo/model'
 import { Member } from 'sdk'
 
 @component('sc-dialog-member-data')
@@ -7,7 +7,7 @@ export class DialogMemberData extends DialogComponent<{ member: Member }> {
 
 	protected render() {
 		return html`
-			<mo-dialog header='Details' primaryButtonText=''>
+			<mo-dialog heading='Details' primaryButtonText=''>
 				<style>
 					div { 
 						display: flex;

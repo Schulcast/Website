@@ -1,4 +1,4 @@
-import { component, html, Component, property, ifDefined } from '@3mo/model/library'
+import { component, html, Component, property, ifDefined } from '@3mo/model'
 import { Member as MemberType } from 'sdk'
 
 @component('sc-member')

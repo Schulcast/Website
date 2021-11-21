@@ -1,4 +1,4 @@
-import { property, html, component } from '@3mo/model/library'
+import { property, html, component } from '@3mo/model'
 import { entityDialogComponent, EntityDialogComponent } from './EntityDialogComponent'
 import { API, Member, Post } from 'sdk'
 
@@ -19,7 +19,7 @@ export class DialogPost extends EntityDialogComponent<Post> {
 
 	protected render() {
 		return html`
-			<mo-dialog header=${this.header} size='medium'>
+			<mo-dialog heading=${this.header} size='medium'>
 				<mo-flex gap='var(--mo-thickness-m)'>
 					<mo-field-text label='Titel' required
 						value=${this.entity.title ?? ''}
